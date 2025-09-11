@@ -5,7 +5,7 @@ function View() {
   return (
     <>
      <Header /> 
-     {/* 1st image view */}
+     {/* 1 st image view */}
      <div className="flex flex-col md:flex-row items-start gap-8 p-8">
   {/* Left Side - Product Image + Buttons */}
   <div className="flex flex-col items-center mt-30">
@@ -45,9 +45,6 @@ function View() {
     </div>
   </div>
 </div>
-
-
- 
     </>
   )
 }
