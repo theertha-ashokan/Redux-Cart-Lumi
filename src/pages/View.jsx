@@ -3,9 +3,12 @@ import { Link, useParams } from 'react-router-dom'
 import Header from '../components/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToWishlist } from '../redux/slice/wishlistSlice'
+import { addToCart } from '../redux/slice/cartSlice'
 
 function View() {
     const userWishlist = useSelector(state => state.wishlistReducer)
+    const userCart = useSelector(state=>state.cartReducer)
+    
     const dispatch = useDispatch()
     const { id } = useParams()
     const [product, setProduct] = useState({})
@@ -24,6 +27,14 @@ function View() {
         }
     }
 
+   const handleCart = ()=>{
+    dispatch(addToCart(product))
+    const existingProduct = userCart?.find(item=>item.id==product.id)
+    if(existingProduct){
+        alert("Product Udated Successfully")
+    }
+   }
+
     return (
         <div>
             <Header />
@@ -38,19 +49,19 @@ function View() {
                             alt={product?.title}
                         />
                         <div className="flex gap-4 mt-5">
-                            <Link
-                                to={'/wishlist'}
+                            <button
+                                
                                 onClick={handleAddToWishlist}
                                 className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white font-medium shadow-md transition"
                             >
                                 ADD TO WISHLIST
-                            </Link>
-                            <Link
-                                to={'/cart'}
+                            </button>
+                            <button
+                                onClick={handleCart}
                                 className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-white font-medium shadow-md transition"
                             >
                                 ADD TO CART
-                            </Link>
+                            </button>
                         </div>
                     </div>
 
